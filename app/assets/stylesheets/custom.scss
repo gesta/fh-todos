@@ -1,0 +1,30 @@
+body {
+  padding-top: 80px;
+}
+
+section {
+  overflow: auto;
+}
+
+textarea {
+  resize: vertical;
+}
+
+.center {
+  text-align: center;
+}
+
+.center h1 {
+  margin-bottom: 10px;
+}
+
+#logo {
+  float: left;
+  font-size: 200%;
+  color: white;
+  text-transform: uppercase;
+  &:hover {
+    color: #D4D4D4;
+    text-decoration: none;
+  }
+}
