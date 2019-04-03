@@ -1,15 +1,29 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>FhTodos</title>
+    <title>Todos</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
   </head>
 
   <body>
-    <%= yield %>
+    <%= render partial: 'layouts/header' %>
+    <div class="container">
+      <% flash.each do |name, msg| -%>
+        <% css_class = {'error' => ' alert-danger', 'info' => ' alert-primary', 'success' => 'alert-success'} %>
+        <%= content_tag :div, msg, class: 'alert' + css_class[name].to_s%>
+      <% end -%>
+      <%= yield %>
+    </div>
   </body>
 </html>
