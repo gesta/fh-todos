@@ -1,0 +1,9 @@
+default: &default
+  adapter: postgresql
+  pool: 5
+  encoding: utf-8
+  timeout: 5000
+
+development:
+  <<: *default
+  database: todos_dev
