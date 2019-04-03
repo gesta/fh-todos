@@ -1,0 +1,46 @@
+<table id="todos-table" class="table table-striped table-bordered table-sm">
+  <thead>
+    <tr>
+      <th>Complete?</th>
+      <th>Content</th>
+      <th>Due date</th>
+      <th>Priority</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @todos.each do |todo| %>
+      <% highlight_td = todo.completed? ? 'highlight' : '' %>
+      <tr class="<%= highlight_td %>">
+        <td class="form-group col-md-1 todo_index">
+          <% switch_id = "Switch-#{todo.id}" %>
+          <% checked = todo.completed? ? checked='checked=""' : '' %>
+          <div class="custom-control custom-switch center">
+            <input type="checkbox" class="custom-control-input" id="<%= switch_id %>" <%= checked %> value="<%= todo.id %>">
+            <label class="custom-control-label" for=<%= switch_id %>></label>
+          </div>
+        </td>
+        <td class="form-group col-md-4 todo_index">
+          <a href="<%= edit_todo_path(todo.id) %>">
+            <span><%= todo.content %></span>
+          </a>
+        </td>
+        <td class="form-group col-md-1 todo_index">
+          <span class="date-to-sort"><%= todo.due_date.strftime('%Y%m%d') %></span>
+          <%= todo.due_date.strftime('%m-%d-%Y') %>
+        </td>
+        <td class="form-group col-md-1 center todo_index">
+          <%= todo.priority %>
+        </td>
+        <td class="form-group col-md-1 center todo_index">
+          <span>
+            <%= button_to 'Delete', {action: :destroy, id: todo.id}, method: :delete,
+              data: {confirm: 'Are you sure?'}, class: 'btn btn-danger btn-xs' %>
+          </span>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'Add new Todo', new_todo_path %>
