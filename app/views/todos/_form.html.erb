@@ -1,0 +1,9 @@
+<%= form_for @todo do |f| %>
+  Content: <%= f.text_field :content %>
+  Priority: <%= f.number_field :priority, min: 1 %>
+  Due date: <%= f.date_field :due_date, min: Date.today, value: Date.today %>
+
+  <%= f.submit %>
+<% end%>
+
+<span><%= link_to 'Back', todos_path %></span>
