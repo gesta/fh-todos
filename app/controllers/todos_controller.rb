@@ -3,6 +3,7 @@ class TodosController < ApplicationController
     @todos = Todo.all
     respond_to do |format|
       format.html { render :index }
+      format.json { render json: @todos }
     end
   end
 
@@ -18,6 +19,7 @@ class TodosController < ApplicationController
           flash[:info] = "You've successfuly created a todo entry."
           redirect_to todos_path
         end
+        format.json { render json: {}, status: :ok }
       end
     else
       @todo = Todo.new(todo_params)
@@ -26,6 +28,7 @@ class TodosController < ApplicationController
           flash[:error] = 'There are errors in the entry!'
           render :new
         end
+        format.json { render json: todo.errors.messages, status: :bad_request }
       end
     end
   end
@@ -35,6 +38,7 @@ class TodosController < ApplicationController
     if @todo
       respond_to do |format|
         format.html { render :edit }
+        format.json { render json: @todo.to_json }
       end
     else
       respond_to do |format|
@@ -42,6 +46,7 @@ class TodosController < ApplicationController
           flash[:error] = 'There is no such entry!'
           redirect_to todos_path
         end
+        format.json { render json: {}, status: :not_found }
       end
     end
   end
@@ -79,6 +84,7 @@ class TodosController < ApplicationController
           flash[:info] = "You've successfuly deleted a todo entry."
           redirect_to todos_path
         end
+        format.json { render json: {}, status: :ok }
       end
     else
       respond_to do |format|
@@ -86,6 +92,7 @@ class TodosController < ApplicationController
           flash[:error] = 'The entry is not deleted!'
           redirect_to todos_path
         end
+        format.json { render json: {}, status: :not_found }
       end
     end
   end
