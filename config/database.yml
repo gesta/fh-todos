@@ -7,3 +7,7 @@ default: &default
 development:
   <<: *default
   database: todos_dev
+
+test:
+  <<: *default
+  database: todos_test
