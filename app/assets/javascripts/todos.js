@@ -1,16 +1,4 @@
 $(document).ready(function() {
-  $('#todos-table').DataTable({
-    'searching': false,
-    'lengthChange': false,
-    'columns': [
-      {'orderable': false},
-      {'orderable': false},
-      null,
-      null,
-      {'orderable': false }
-    ]
-  });
-
   $('.custom-control-input').click(function(event) {
     var csrfToken = $('meta[name=csrf-token]')[0].content;
     var checkbox = $(event.target);
