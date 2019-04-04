@@ -1,5 +1,13 @@
 <header class="navbar bg-dark fixed-top">
   <div class="container">
     <%= link_to 'Todos', todos_path, id: 'logo' %>
+    <nav>
+      <% if logged_in? %>
+        <%= link_to 'Log out', logout_path, method: :delete %>
+      <% else %>
+        <span class="navbar-link"><%= link_to 'Log in', login_path %></span>
+        <span class="navbar-link"><%= link_to 'Signup', signup_path %></span>
+      <% end %>
+    </nav>
   </div>
 </header>
