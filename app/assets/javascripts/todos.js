@@ -32,4 +32,37 @@ $(document).ready(function() {
         }
       });
   });
+
+  function sortTable(table, dataCell, sortClass, sortOrder) {
+    var rows = $('tbody > tr', table);
+    rows.sort(function (rowA, rowB) {
+      var keyA = $(rowA).children('.' + dataCell).children('.' + sortClass).text()
+      var keyB = $(rowB).children('.' + dataCell).children('.' + sortClass).text()
+      if (sortOrder.toLowerCase() === 'asc') {
+        return (keyA > keyB) ? true : false;
+      } else if (sortOrder.toLowerCase() === 'desc') {
+        return (keyA < keyB) ? true : false;
+      }
+    });
+    $.each(rows, function(index, row) { table.append(row); });
+  }
+
+  function alternatingSort(target) {
+    if(sortColumn.val() === 'desc') { sortColumn.val('asc'); }
+    else if(sortColumn.val() === 'asc') { sortColumn.val('desc'); }
+    else { sortColumn.val('desc'); }
+
+  }
+
+  $('#due-date-column').click(function(event) {
+    sortColumn = $(event.target);
+    alternatingSort(sortColumn);
+    sortTable($('table'), 'date-time-td', 'date-to-sort', sortColumn.val());
+  });
+
+  $('#priority-column').click(function(event) {
+    sortColumn = $(event.target)
+    alternatingSort(sortColumn);
+    sortTable($('table'), 'priority-td', 'priority-to-sort', sortColumn.val())
+  });
 });

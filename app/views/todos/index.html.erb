@@ -3,8 +3,8 @@
     <tr>
       <th>Complete?</th>
       <th>Content</th>
-      <th>Due date</th>
-      <th>Priority</th>
+      <th id="due-date-column">Due date</th>
+      <th id="priority-column">Priority</th>
       <th></th>
     </tr>
   </thead>
@@ -25,12 +25,12 @@
             <span><%= todo.content %></span>
           </a>
         </td>
-        <td class="form-group col-md-1 todo_index">
-          <span class="date-to-sort"><%= todo.due_date.strftime('%Y%m%d') %></span>
+        <td class="form-group col-md-1 todo_index date-time-td">
+          <span class="date-to-sort" hidden><%= todo.due_date.strftime('%Y%m%d') %></span>
           <%= todo.due_date.strftime('%m-%d-%Y') %>
         </td>
-        <td class="form-group col-md-1 center todo_index">
-          <%= todo.priority %>
+        <td class="form-group col-md-1 center todo_index priority-td">
+          <span class="priority-to-sort" ><%= todo.priority %></span>
         </td>
         <td class="form-group col-md-1 center todo_index">
           <span>
