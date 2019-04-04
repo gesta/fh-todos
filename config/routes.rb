@@ -8,4 +8,7 @@ Rails.application.routes.draw do
   patch '/api/v1/todos/:id', to: 'todos#update'
   put '/api/v1/todos/:id', to: 'todos#update'
   delete '/api/v1/todos/:id', to: 'todos#destroy'
+
+  get '/signup', to: 'users#new'
+  post '/users', to: 'users#create'
 end
