@@ -1,6 +1,6 @@
 <header class="navbar bg-dark fixed-top">
   <div class="container">
-    <%= link_to 'Todos', todos_path, id: 'logo' %>
+    <%= link_to 'Todos', todos_path, id: 'logo', method: :get %>
     <nav>
       <% if logged_in? %>
         <%= link_to 'Log out', logout_path, method: :delete %>
