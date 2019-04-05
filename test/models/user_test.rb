@@ -17,7 +17,7 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test 'email addresses has to be unique' do
-    user = build_user().tap(&:save)
+    user = create_user()
     duplicate_user = user.dup
     duplicate_user.email = user.email.upcase
     duplicate_user.tap(&:validate)
@@ -27,7 +27,7 @@ class UserTest < ActiveSupport::TestCase
 
   test 'email addresses has to be persisted lower-cased' do
     mixed_case_email = 'tEsT@EmA.iL'
-    user = build_user({email: mixed_case_email}).tap(&:save)
+    user = create_user({email: mixed_case_email})
 
     assert mixed_case_email.downcase == user.email
   end

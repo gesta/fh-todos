@@ -18,6 +18,10 @@ module UserTestHelper
     User.new(default_user_attributes().merge(extra))
   end
 
+  def create_user(extra = {})
+    build_user(extra).tap(&:save!)
+  end
+
   def default_todo_attributes
     {
       completed?: false,
@@ -29,6 +33,10 @@ module UserTestHelper
 
   def build_todo(extra = {})
     Todo.new(default_todo_attributes().merge(extra))
+  end
+
+  def create_todo(extra = {})
+    build_todo(extra).tap(&:save!)
   end
 end
 
