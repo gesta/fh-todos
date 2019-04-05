@@ -1,4 +1,7 @@
 class TodosController < ApplicationController
+  before_action :logged_in_as_admin?, only: [:destroy]
+  before_action :logged_in_user, except: [:index]
+
   def index
     @todos = Todo.all
     respond_to do |format|
