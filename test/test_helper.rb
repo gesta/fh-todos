@@ -32,6 +32,24 @@ module UserTestHelper
   end
 end
 
+module SessionsTestHelper
+  def log_in(user_attributes = {}, login_attributes = {})
+    User.create(default_user_attributes().merge(user_attributes))
+    user_session = default_user_attributes().slice(:email, :password).merge(login_attributes)
+    post login_path, params: {session: user_session}
+  end
+end
+
+class ActionDispatch::IntegrationTest
+  include UserTestHelper
+  include SessionsTestHelper
+
+  def empty_flash?
+    get '/'
+    assert flash.empty?
+  end
+end
+
 class ActiveSupport::TestCase
   include UserTestHelper
 end
